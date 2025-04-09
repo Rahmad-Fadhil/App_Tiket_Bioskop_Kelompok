@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kelompok_app_tiket_bioskop/pages/detailMovie.dart';
+import 'package:kelompok_app_tiket_bioskop/pages/login.dart';
 import 'package:kelompok_app_tiket_bioskop/pages/listMovie.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -137,7 +137,13 @@ class HomeScreen extends StatelessWidget {
           "TIX CINEMA"
           , style: TextStyle(color: Colors.white),),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.menu),  color: Colors.white)
+          IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => login() ));
+            }, 
+            icon: Icon(Icons.account_circle),  
+            color: Colors.white
+          )
         ],
       ),
       body: ListView(
@@ -188,21 +194,15 @@ class HomeScreen extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.all(12),
                           child: 
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => Detailmovie()));
-                              },
-                              child: Container(
-                                height: 230,
-                                width: 140,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                    image: AssetImage(daftarMovie[index]['Gambar']),
-                                    fit: BoxFit.cover
-                                  )
-                                ),
+                            Container(
+                              height: 230,
+                              width: 140,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  image: AssetImage(daftarMovie[index]['Gambar']),
+                                  fit: BoxFit.cover
+                                )
                               ),
                             ),
                       );
