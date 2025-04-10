@@ -139,7 +139,7 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => login() ));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Login() ));
             }, 
             icon: Icon(Icons.account_circle),  
             color: Colors.white
