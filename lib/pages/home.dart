@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kelompok_app_tiket_bioskop/pages/login.dart';
 import 'package:kelompok_app_tiket_bioskop/pages/listMovie.dart';
+import 'package:kelompok_app_tiket_bioskop/pages/profil.dart';
 
 class HomeScreen extends StatelessWidget {
+  List<String> daftarTrending = ["assets/1 movie info.jpg", "assets/2 movie info.jpg", "assets/3 movie info.jpg", "assets/4 movie info.jpg", "assets/5 movie info.jpg"];
   List<Map<String, dynamic>> daftarMovie = [
     {
       'Gambar':"assets/1 (1).jpg",
@@ -12,25 +14,25 @@ class HomeScreen extends StatelessWidget {
     },
     {
       'Gambar':"assets/1 (2).jpg",
-      'judul': 'Fast & Furious 9',
+      'judul': 'Fast & Furious X',
       'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
       'event': 'in theater'
     },
     {
       'Gambar':"assets/1 (3).jpg",
-      'judul': 'Fast & Furious 9',
+      'judul': "Doraemon: Nobita's Sky Utopia",
       'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
       'event': 'Coming soon'
     },
     {
       'Gambar':"assets/1 (4).jpg",
-      'judul': 'Fast & Furious 9',
+      'judul': 'Doraemon: Nobita dan Pahlawan Luar Angkasa',
       'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
       'event': 'Coming soon'
     },
     {
       'Gambar':"assets/1 (5).jpg",
-      'judul': 'Fast & Furious 9',
+      'judul': 'Avengers: Endgame',
       'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
       'event': 'Coming soon'
     },
@@ -42,85 +44,25 @@ class HomeScreen extends StatelessWidget {
     },
     {
       'Gambar':"assets/1 (7).jpg",
-      'judul': 'Fast & Furious 9',
+      'judul': 'Fast & Furious 7',
       'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
       'event': 'in theater'
     },
     {
       'Gambar':"assets/1 (8).jpg",
-      'judul': 'Fast & Furious 9',
+      'judul': 'Moana 2',
       'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
       'event': 'in theater'
     },
     {
       'Gambar':"assets/1 (9).jpg",
-      'judul': 'Fast & Furious 9',
+      'judul': 'Doraemon Great Adventure in the Antarctic kachi kochi',
       'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
       'event': 'in theater'
     },
     {
       'Gambar':"assets/1 (10).jpg",
-      'judul': 'Fast & Furious 9',
-      'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
-      'event': 'Coming soon'
-    },
-    {
-      'Gambar':"assets/1 (1).jpg",
-      'judul': 'Fast & Furious 9',
-      'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
-      'event': 'Coming soon'
-    },
-    {
-      'Gambar':"assets/1 (2).jpg",
-      'judul': 'Fast & Furious 9',
-      'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
-      'event': 'in theater'
-    },
-    {
-      'Gambar':"assets/1 (3).jpg",
-      'judul': 'Fast & Furious 9',
-      'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
-      'event': 'Coming soon'
-    },
-    {
-      'Gambar':"assets/1 (4).jpg",
-      'judul': 'Fast & Furious 9',
-      'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
-      'event': 'Coming soon'
-    },
-    {
-      'Gambar':"assets/1 (5).jpg",
-      'judul': 'Fast & Furious 9',
-      'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
-      'event': 'Coming soon'
-    },
-    {
-      'Gambar':"assets/1 (6).jpg",
-      'judul': 'Fast & Furious 9',
-      'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
-      'event': 'in theater'
-    },
-    {
-      'Gambar':"assets/1 (7).jpg",
-      'judul': 'Fast & Furious 9',
-      'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
-      'event': 'in theater'
-    },
-    {
-      'Gambar':"assets/1 (8).jpg",
-      'judul': 'Fast & Furious 9',
-      'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
-      'event': 'in theater'
-    },
-    {
-      'Gambar':"assets/1 (9).jpg",
-      'judul': 'Fast & Furious 9',
-      'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
-      'event': 'in theater'
-    },
-    {
-      'Gambar':"assets/1 (10).jpg",
-      'judul': 'Fast & Furious 9',
+      'judul': "Doraemon: Nobita's Earth Symphony",
       'deskripsi': 'Vin Diesel Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he going to save those he loves most.',
       'event': 'Coming soon'
     },
@@ -133,18 +75,28 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
+        foregroundColor: Colors.white,
         title: Text(
           "TIX CINEMA"
-          , style: TextStyle(color: Colors.white),),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Login() ));
-            }, 
-            icon: Icon(Icons.account_circle),  
-            color: Colors.white
-          )
-        ],
+          , style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        actions: [PopupMenuButton(itemBuilder: (context) {
+          return <PopupMenuEntry<String>>[
+            PopupMenuItem(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Profil()));
+              },
+              child: Text("Profil"),
+            ),
+            PopupMenuItem(
+              onTap: () {
+                Navigator.pop(context, MaterialPageRoute(builder: (context) => Login()));
+              },
+              child: Text('Logout'),
+            ),
+          ];
+        },)]
       ),
       body: ListView(
         scrollDirection: Axis.vertical,
@@ -186,23 +138,37 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 250,
+                  height: 264,
                   child: ListView.builder( // untuk scroll secara horizontal
                     scrollDirection: Axis.horizontal,
                     itemCount: daftarMovie.length,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.all(12),
+                        padding: const EdgeInsets.all(8),
                           child: 
-                            Container(
-                              height: 230,
+                            SizedBox(
                               width: 140,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  image: AssetImage(daftarMovie[index]['Gambar']),
-                                  fit: BoxFit.cover
-                                )
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                        image: AssetImage(daftarMovie[index]['Gambar']),
+                                        fit: BoxFit.cover
+                                      )
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    daftarMovie[index]['judul'],
+                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
                               ),
                             ),
                       );
@@ -210,34 +176,33 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 22,
+                  height: 8,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Promo",
+                      "Trending",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 250,
+                  height: 160,
                   child: ListView.builder( // untuk scroll secara horizontal
                     scrollDirection: Axis.horizontal,
-                    itemCount: daftarMovie.length,
+                    itemCount: daftarTrending.length,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.all(12),
                           child: 
                             Container(
-                              height: 230,
-                              width: 380,
+                              width: 400,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(
-                                  image: AssetImage('assets/1 (5).jpg'),
-                                  fit: BoxFit.cover
+                                  image: AssetImage(daftarTrending[index]),
+                                  fit: BoxFit.fitHeight
                                 )
                               ),
                             ),
@@ -246,7 +211,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 22,
+                  height: 8,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -263,23 +228,37 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 250,
+                  height: 264,
                   child: ListView.builder( // untuk scroll secara horizontal
                     scrollDirection: Axis.horizontal,
                     itemCount: daftarMovie.length,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.all(12),
+                        padding: const EdgeInsets.all(8),
                           child: 
-                            Container(
-                              height: 230,
+                            SizedBox(
                               width: 140,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  image: AssetImage(daftarMovie[index]['Gambar']),
-                                  fit: BoxFit.cover
-                                )
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                        image: AssetImage(daftarMovie[index]['Gambar']),
+                                        fit: BoxFit.cover
+                                      )
+                                    ),
+                                  ),
+                                  SizedBox(height: 8,),
+                                  Text(
+                                    daftarMovie[index]['judul'],
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                  )
+                                ],
                               ),
                             ),
                       );

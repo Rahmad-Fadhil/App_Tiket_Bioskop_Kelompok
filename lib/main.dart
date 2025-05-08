@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kelompok_app_tiket_bioskop/pages/home.dart';
+import 'package:kelompok_app_tiket_bioskop/pages/regist.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: HomeScreen()
+      home: Register()
     );
   }
 }

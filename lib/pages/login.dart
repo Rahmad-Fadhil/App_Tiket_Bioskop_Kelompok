@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kelompok_app_tiket_bioskop/pages/regist.dart';
 // import 'package:kelompok_app_tiket_bioskop/pages/home.dart';
 import 'home.dart';
 
@@ -88,8 +89,24 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 10),
 
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("do you not have an account yet"),
+                    Padding(
+                      padding: const EdgeInsets.all(0),
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Register()));
+                        }, child: Text('Register')
+                      ),
+                    )
+                  ],
+                ),
+
+                const SizedBox(height: 10),
                 //tombol login
                 ElevatedButton.icon(
                   onPressed: () {
