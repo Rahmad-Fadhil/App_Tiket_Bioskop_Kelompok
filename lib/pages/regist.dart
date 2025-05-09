@@ -7,14 +7,18 @@ void main() {
    debugShowCheckedModeBanner: false,
  ));
 }
+
 class Register extends StatefulWidget {
  const Register({Key? key}) : super(key: key);
  @override
  State<Register> createState() => _RegisterState();
 }
+
 class _RegisterState extends State<Register> {
  bool showPassword = false;
  bool showConfirmPassword = false;
+ bool isAgreed = false; 
+
  final idCtr = TextEditingController();
  final emailCtr = TextEditingController();
  final pwCtr = TextEditingController();
@@ -23,8 +27,11 @@ class _RegisterState extends State<Register> {
  @override
  Widget build(BuildContext context) {
    return Scaffold(
-    //  appBar: AppBar(title: const Text('Create Your Account', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40, ))),
-     body: Padding(
+     body: 
+     Container(
+      color: Colors.orangeAccent[100],
+      child: 
+     Padding(
        padding: const EdgeInsets.all(12),
        child: Center(
         child: SizedBox(
@@ -32,12 +39,23 @@ class _RegisterState extends State<Register> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center ,
            children: [
-            Text('Create Your Account', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40, )),
+            Text('Create Your Account', style: TextStyle(
+              fontWeight: FontWeight.bold,fontSize: 40,
+              color: Colors.orange[900],
+               shadows: [
+                Shadow(
+                  offset: Offset(2, 2),
+                  blurRadius: 4,
+                  color: Colors.black26,
+                ),  
+              ],
+            )),
+            const SizedBox(height: 20),
              TextField(
                controller: idCtr,
                decoration: const InputDecoration(
                  labelText: 'ID',
-                 border: OutlineInputBorder(),   
+                 border: OutlineInputBorder(), 
                ),
              ),
              const SizedBox(height: 20),
@@ -88,36 +106,56 @@ class _RegisterState extends State<Register> {
              ),
              const SizedBox(height: 20),
              
-             
-            ElevatedButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (_) => AlertDialog(
-                    content: const Text("Akun berhasil dibuat!"),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop(); // Tutup dialog
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (_) => Login()),
-                          );
-                        },
-                        child: const Text("OK"),
-                      ),
-                    ],
-                  ),
-                );
-              },
-              child: const Text("SIGN UP", style: TextStyle(color: Colors.pink)),
-            ),
+             Row(
+               mainAxisAlignment: MainAxisAlignment.center,
+               children: [
+                 Checkbox(
+                   value: isAgreed,
+                   onChanged: (value) {
+                     setState(() {
+                       isAgreed = value ?? false;
+                     });
+                   },
+                 ),
+                 const Text("Saya menyetujui syarat & ketentuan"),
+               ],
+             ),
+             const SizedBox(height: 10),
        
+             ElevatedButton(
+               onPressed: isAgreed ? (){
+                       showDialog(
+                         context: context,
+                         builder: (_) => AlertDialog(
+                           content: const Text("Akun berhasil dibuat!"),
+                           actions: [
+                             TextButton(
+                               onPressed: () {
+                                 Navigator.of(context).pop();
+                                 Navigator.pushReplacement(
+                                   context,
+                                   MaterialPageRoute(builder: (_) => Login()),
+                                 );
+                               },
+                               child: const Text("OK"),
+                             ),
+                           ],
+                         ),
+                       );
+                     }
+                   : null, 
+               child: const Text("SIGN UP",
+                 style: TextStyle(
+                   color: Colors.orange,
+                   fontWeight: FontWeight.bold,
+                   fontSize: 16,
+                 )),
+             ),
            ],       
          ),
         ),
-         
        ),
+     ),
      ),
    );
  }

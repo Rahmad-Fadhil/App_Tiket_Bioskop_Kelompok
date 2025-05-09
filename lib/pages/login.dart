@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kelompok_app_tiket_bioskop/Provider/provider.dart';
 import 'package:kelompok_app_tiket_bioskop/pages/regist.dart';
-// import 'package:kelompok_app_tiket_bioskop/pages/home.dart';
+import 'package:provider/provider.dart';
 import 'home.dart';
 
 class Login extends StatefulWidget {
@@ -37,7 +38,7 @@ class _LoginState extends State<Login> {
                 const Text('Login', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white)),
                 const SizedBox(height: 40),
 
-                //input utk usn
+                // Input username
                 SizedBox(
                   width: 320,
                   child: TextField(
@@ -45,7 +46,7 @@ class _LoginState extends State<Login> {
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.person, color: Colors.white70),
-                      hintText: 'usn',
+                      hintText: 'Username',
                       hintStyle: const TextStyle(color: Colors.white70),
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.2),
@@ -58,7 +59,7 @@ class _LoginState extends State<Login> {
                 ),
                 const SizedBox(height: 20),
 
-                //input utk password
+                // Input password
                 SizedBox(
                   width: 320,
                   child: TextField(
@@ -78,7 +79,7 @@ class _LoginState extends State<Login> {
                           });
                         },
                       ),
-                      hintText: 'password',
+                      hintText: 'Password',
                       hintStyle: const TextStyle(color: Colors.white70),
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.2),
@@ -100,23 +101,29 @@ class _LoginState extends State<Login> {
                       child: TextButton(
                         onPressed: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => Register()));
-                        }, child: Text('Register')
+                        }, child: Text('Register', style:TextStyle(color: Colors.deepPurple,) )
                       ),
                     )
                   ],
                 ),
-
                 const SizedBox(height: 10),
-                //tombol login
+                // Tombol Login
                 ElevatedButton.icon(
                   onPressed: () {
-                    if (_usernameController.text.isNotEmpty &&
-                        _passwordController.text.isNotEmpty) {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                    String username = _usernameController.text.trim();
+                    String password = _passwordController.text.trim();
+
+                    if (username.isNotEmpty && password.isNotEmpty) {
+                      // Simpan username ke Provider
+                      Provider.of<UserProvider>(context, listen: false).login(username);
+
+                      // Navigasi ke HomeScreen
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const HomeScreen()),
+                      );
                     }
                   },
-
-
                   icon: const Icon(Icons.login),
                   label: const Text('Masuk'),
                   style: ElevatedButton.styleFrom(
@@ -132,8 +139,6 @@ class _LoginState extends State<Login> {
           ),
         ),
       ),
-
-      
     );
   }
 }

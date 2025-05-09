@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kelompok_app_tiket_bioskop/Provider/provider.dart';
+import 'package:provider/provider.dart';
 
 class Profil extends StatefulWidget {
   const Profil({super.key});
@@ -13,6 +15,7 @@ class _ProfilState extends State<Profil> {
 
   @override
   Widget build(BuildContext context) {
+    final username = Provider.of<UserProvider>(context).username;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
@@ -76,8 +79,11 @@ class _ProfilState extends State<Profil> {
                         borderSide: BorderSide(color: Colors.grey),
                       ),
                       contentPadding: EdgeInsets.all(14),
-                      hintText: 'Person'
+                      hintText: username
                     ),
+                    onChanged: (value) {
+                      Provider.of<UserProvider>(context, listen: false).setUsername(value);
+                    },
                   ),
                   SizedBox(height: 20,),
                   Row(
@@ -145,7 +151,7 @@ class _ProfilState extends State<Profil> {
                         borderSide: BorderSide(color: Colors.grey),
                       ),
                       contentPadding: EdgeInsets.all(14),
-                      hintText: 'Tulis sesuatu tentang diri Anda... dsdsadasdsdsdsdsdsdsdsdsdsdsdsdasdsddsadasdasdsdsaddfdsfdfffhbrufrunfdjinfjkldcdjfdnfrenfurenfurenfrufnreufnrufnrufnrfdfsnvfjvfjvnfjnrufernfunrfurnfurienforfnurneqfonrufnwfnwuerfnoruwfnurnforfnowornfurnfrofnrnfuronfrfnurfrfnurnfrunfrufnrfonrfnrufnrufnrufnrfnornrnfu'
+                      hintText: 'Tulis sesuatu tentang diri Anda...'
                     ),
                   ),
                   SizedBox(height: 20,),

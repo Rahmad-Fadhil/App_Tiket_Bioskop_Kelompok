@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
-class Listmovie extends StatelessWidget {
+class Listmovie extends StatefulWidget {
   const Listmovie({super.key});
 
+  @override
+  State<Listmovie> createState() => _ListmovieState();
+}
+
+class _ListmovieState extends State<Listmovie> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
-        title: Text("Coming Soon Movie",  style: TextStyle(color: Colors.white)),
+        foregroundColor: Colors.white,
+        title: Text("In Theater Movie",  style: TextStyle(color: Colors.white)),
       ),
     );
   }
