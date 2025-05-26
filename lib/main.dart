@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kelompok_app_tiket_bioskop/Provider/provider.dart';
-import 'package:kelompok_app_tiket_bioskop/pages/regist.dart';
+import 'package:kelompok_app_tiket_bioskop/pages/historytiketpembelian.dart';
+// import 'package:kelompok_app_tiket_bioskop/pages/regist.dart';
 import 'package:provider/provider.dart';
 
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const Register(),
+      home: const TiketHistory(),
     );
   }
 }
