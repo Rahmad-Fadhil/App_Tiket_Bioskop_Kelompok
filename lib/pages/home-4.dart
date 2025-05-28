@@ -1,21 +1,12 @@
 import 'package:flutter/material.dart';
-// import 'package:kelompok_app_tiket_bioskop/Provider/provider.dart';
-// import 'package:kelompok_app_tiket_bioskop/pages/historytiketpembelian.dart';
-// import 'package:kelompok_app_tiket_bioskop/pages/tentang.dart';
-// import 'package:flutter_application_1/providerr/provider.dart';
-// import 'package:flutter_application_1/pages/commingsoon.dart';
-// import 'package:flutter_application_1/pages/login.dart';
-// import 'package:flutter_application_1/pages/listMovie.dart';
-// import 'package:flutter_application_1/pages/profil.dart';
 import 'package:provider/provider.dart';
 import 'package:tugas2/Provider/provider.dart';
+import 'package:tugas2/pages/commingsoon.dart';
 import 'package:tugas2/pages/historytiketpembelian.dart';
+import 'package:tugas2/pages/listMovie.dart';
+import 'package:tugas2/pages/login.dart';
+import 'package:tugas2/pages/settings.dart';
 import 'package:tugas2/pages/tentang.dart';
-
-import 'commingsoon.dart';
-import 'listMovie.dart';
-import 'login.dart';
-import 'profil.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -73,13 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
       'event': 'Coming soon'
     },
     {
-      'Gambar': "https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg",
-      'judul': 'Thor: Love and Thunder',
-      'genre': 'Action',
-      'deskripsi': 'After his retirement is interrupted by Gorr the God Butcher, Thor enlists the help of King Valkyrie.',
-      'event': 'in theater'
-    },
-    {
       'Gambar': "https://image.tmdb.org/t/p/w500/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg",
       'judul': 'Minions: The Rise of Gru',
       'genre': 'Comedy',
@@ -108,23 +92,6 @@ class _HomeScreenState extends State<HomeScreen> {
       'event': 'Coming soon'
     },
   ];
-
-  void _showSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        duration: Duration(seconds: 2),
-        backgroundColor: Colors.black87,
-        action: SnackBarAction(
-          label: 'Close',
-          textColor: Colors.white,
-          onPressed: () {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          },
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -244,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black87,
         foregroundColor: Colors.white,
-        title: Text("Welcome, $username", style: const TextStyle(color: Colors.white)),
+        title: Text("NMFC", style: const TextStyle(color: Colors.white)),
         centerTitle: true,
         elevation: 0,
       ),
@@ -278,29 +245,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            // HOME DENGAN SUBMENU
-            ExpansionTile(
+            // HOME
+            ListTile(
               leading: Icon(Icons.home, color: Colors.white),
               title: Text('Home', style: TextStyle(color: Colors.white)),
-              iconColor: Colors.white,
-              collapsedIconColor: Colors.white,
-              children: [
-                ListTile(
-                  leading: Icon(Icons.movie, color: Colors.white70),
-                  title: Text('Now Playing', style: TextStyle(color: Colors.white70)),
-                  onTap: () => Navigator.pop(context),
-                ),
-                ListTile(
-                  leading: Icon(Icons.schedule, color: Colors.white70),
-                  title: Text('Coming Soon', style: TextStyle(color: Colors.white70)),
-                  onTap: () => Navigator.pop(context),
-                ),
-                ListTile(
-                  leading: Icon(Icons.trending_up, color: Colors.white70),
-                  title: Text('Trending', style: TextStyle(color: Colors.white70)),
-                  onTap: () => Navigator.pop(context),
-                ),
-              ],
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
+              },
             ),
 
             // PROFILE
@@ -309,10 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text('Profile', style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => Profil()
-                ));
-              }   
+              },
             ),
 
             Divider(color: Colors.white30),
@@ -321,15 +273,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               leading: Icon(Icons.confirmation_number, color: Colors.white),
               title: Text('Ticket Purchase', style: TextStyle(color: Colors.white)),
-              trailing: Container(
-                padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text('NEW', style: TextStyle(color: Colors.white, fontSize: 10)),
-              ),
-              onTap: () => Navigator.pop(context),
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
 
             // PURCHASE HISTORY
@@ -341,27 +287,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) => TiketHistory()
                 ));
-              } 
-            ),
-
-            // MANAGE CONTENT
-            ExpansionTile(
-              leading: Icon(Icons.edit, color: Colors.white),
-              title: Text('Manage Content', style: TextStyle(color: Colors.white)),
-              iconColor: Colors.white,
-              collapsedIconColor: Colors.white,
-              children: [
-                ListTile(
-                  leading: Icon(Icons.add_circle, color: Colors.white70),
-                  title: Text('Add Movie', style: TextStyle(color: Colors.white70)),
-                  onTap: () => Navigator.pop(context),
-                ),
-                ListTile(
-                  leading: Icon(Icons.edit_note, color: Colors.white70),
-                  title: Text('Edit Movie', style: TextStyle(color: Colors.white70)),
-                  onTap: () => Navigator.pop(context),
-                ),
-              ],
+              },
             ),
 
             Divider(color: Colors.white30),
@@ -370,7 +296,12 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               leading: Icon(Icons.settings, color: Colors.white),
               title: Text('Settings', style: TextStyle(color: Colors.white)),
-              onTap: () => Navigator.pop(context),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => Settings()
+                ));
+              },
             ),
 
             // ABOUT
@@ -382,14 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) => About()
                 ));
-              } 
-            ),
-
-            // LOGIN/REGISTER
-            ListTile(
-              leading: Icon(Icons.login, color: Colors.white),
-              title: Text('Login/Register', style: TextStyle(color: Colors.white)),
-              onTap: () => Navigator.pop(context),
+              },
             ),
 
             SizedBox(height: 20),
@@ -451,6 +375,57 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView(
         scrollDirection: Axis.vertical,
         children: [
+          // Banner
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.black87,
+                  Colors.grey[800]!,
+                ],
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 6,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Welcome to beng beng beng,",
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  username,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  "Yuyuk, cari film favorit kamu!",
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
           Padding(
             padding: const EdgeInsets.all(12),
             child: Column(
@@ -500,7 +475,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             setState(() {
                               selectedGenre = genre;
                             });
-                            _showSnackBar(context, "Genre filtered to: $genre");
                           },
                           selectedColor: Colors.black87,
                           backgroundColor: Colors.grey[200],
@@ -586,38 +560,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black87,
-        child: Icon(Icons.info_outline, color: Colors.white),
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                title: Row(
-                  children: [
-                    Icon(Icons.movie, color: Colors.black87),
-                    SizedBox(width: 8),
-                    Text("CinemaApp Info"),
-                  ],
-                ),
-                content: Text("This is the home page of CinemaApp. Browse through our collection of movies, filter by genre, and check out what's trending!"),
-                actions: [
-                  TextButton(
-                    child: Text("OK", style: TextStyle(color: Colors.black87)),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              );
-            },
-          );
-        },
       ),
     );
   }

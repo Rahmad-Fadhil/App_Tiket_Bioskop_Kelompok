@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 // import 'package:kelompok_app_tiket_bioskop/pages/regist.dart';
 import 'package:provider/provider.dart';
 import 'package:tugas2/Provider/provider.dart';
-import 'package:tugas2/pages/home-2.dart';
+// import 'package:tugas2/pages/home-2.dart';
+import 'package:tugas2/pages/home-4.dart';
 import 'package:tugas2/pages/regist.dart';
 // import 'home.dart';
 

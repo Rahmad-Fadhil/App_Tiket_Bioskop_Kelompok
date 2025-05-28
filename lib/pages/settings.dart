@@ -13,6 +13,7 @@ class _SettingsState extends State<Settings> {
   bool _notificationsEnabled = true;
   String _selectedTheme = 'Light';
   String _selectedLanguage = 'English';
+  bool isAgreed = false;
 
   final TextEditingController _newPasswordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
@@ -113,15 +114,29 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: isAgreed,
+                        onChanged: (value) {
+                          setState(() {
+                            isAgreed = value ?? false;
+                          });
+                        },
+                      ),
+                      const Text("Simpan password saya"),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: _resetPassword,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Colors.green,
                         padding: const EdgeInsets.symmetric(vertical: 15),
                       ),
-                      child: const Text("Reset Password"),
+                      child: const Text("Reset Password", style: TextStyle(color: Colors.white)),
                     ),
                   ),
                 ],
@@ -137,9 +152,21 @@ class _SettingsState extends State<Settings> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text("Language"),
-                Icon(Icons.chevron_right),
+              children: [
+                const Text("Language"),
+                DropdownButton<String>(
+                  value: _selectedLanguage,
+                  items: const [
+                    DropdownMenuItem(value: 'English', child: Text('English')),
+                    DropdownMenuItem(value: 'Bahasa Indonesia', child: Text('Bahasa Indonesia')),
+                    DropdownMenuItem(value: 'Spanish', child: Text('Spanish')),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedLanguage = value!;
+                    });
+                  },
+                ),
               ],
             ),
             Row(
@@ -179,6 +206,7 @@ class _SettingsState extends State<Settings> {
             Row(
               children: [
                 Radio<String>(
+                  activeColor: Colors.green,
                   value: 'Light',
                   groupValue: _selectedTheme,
                   onChanged: (value) {
@@ -189,6 +217,7 @@ class _SettingsState extends State<Settings> {
                 ),
                 const Text('Light'),
                 Radio<String>(
+                  activeColor: Colors.green,
                   value: 'Dark',
                   groupValue: _selectedTheme,
                   onChanged: (value) {
@@ -199,22 +228,6 @@ class _SettingsState extends State<Settings> {
                 ),
                 const Text('Dark'),
               ],
-            ),
-
-            const SizedBox(height: 30),
-            const Text("Language", style: TextStyle(fontSize: 16)),
-            DropdownButton<String>(
-              value: _selectedLanguage,
-              items: const [
-                DropdownMenuItem(value: 'English', child: Text('English')),
-                DropdownMenuItem(value: 'Bahasa Indonesia', child: Text('Bahasa Indonesia')),
-                DropdownMenuItem(value: 'Spanish', child: Text('Spanish')),
-              ],
-              onChanged: (value) {
-                setState(() {
-                  _selectedLanguage = value!;
-                });
-              },
             ),
           ],
         ),
