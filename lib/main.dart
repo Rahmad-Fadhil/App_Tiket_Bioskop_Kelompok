@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:kelompok_app_tiket_bioskop/Provider/provider.dart';
-import 'package:kelompok_app_tiket_bioskop/pages/historytiketpembelian.dart';
+// import 'package:kelompok_app_tiket_bioskop/Provider/provider.dart';
+// import 'package:kelompok_app_tiket_bioskop/pages/historytiketpembelian.dart';
+// import 'package:kelompok_app_tiket_bioskop/pages/home-2.dart';
 // import 'package:kelompok_app_tiket_bioskop/pages/regist.dart';
 import 'package:provider/provider.dart';
+import 'package:tugas2/Provider/provider.dart';
+import 'package:tugas2/pages/home-2.dart';
 
 
 void main() {
@@ -21,7 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const TiketHistory(),
+      home: const HomeScreen(),
     );
   }
 }

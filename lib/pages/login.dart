@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:kelompok_app_tiket_bioskop/Provider/provider.dart';
-import 'package:kelompok_app_tiket_bioskop/pages/regist.dart';
+// import 'package:kelompok_app_tiket_bioskop/Provider/provider.dart';
+// import 'package:kelompok_app_tiket_bioskop/pages/home-2.dart';
+// import 'package:kelompok_app_tiket_bioskop/pages/regist.dart';
 import 'package:provider/provider.dart';
-import 'home.dart';
+import 'package:tugas2/Provider/provider.dart';
+import 'package:tugas2/pages/home-2.dart';
+import 'package:tugas2/pages/regist.dart';
+// import 'home.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
