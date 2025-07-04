@@ -110,9 +110,6 @@ class _TiketHistoryState extends State<TiketHistory> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Tiket History"),
-        centerTitle: true,
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),

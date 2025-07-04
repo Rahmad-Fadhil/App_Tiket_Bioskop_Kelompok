@@ -61,7 +61,6 @@ class _AboutState extends State<About> {
     return Scaffold(
       appBar: AppBar(
         title: Text("About"),
-        backgroundColor: Colors.deepOrange,
       ),
       body: Center(
           child: Container(

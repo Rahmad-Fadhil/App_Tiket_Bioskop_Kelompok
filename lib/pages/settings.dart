@@ -10,7 +10,7 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   bool _showPasswordForm = false;
   bool _obscurePassword = true;
-  bool _notificationsEnabled = true;
+  bool _notificationsEnabled = false;
   String _selectedTheme = 'Light';
   String _selectedLanguage = 'English';
   bool isAgreed = false;
@@ -30,6 +30,10 @@ class _SettingsState extends State<Settings> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Passwords do not match")),
       );
+    } else if (!isAgreed) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("You must agree to save password")),
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Password successfully changed")),
@@ -38,6 +42,7 @@ class _SettingsState extends State<Settings> {
         _showPasswordForm = false;
         _newPasswordController.clear();
         _confirmPasswordController.clear();
+        isAgreed = false;
       });
     }
   }
@@ -57,31 +62,25 @@ class _SettingsState extends State<Settings> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: const [
-                Icon(Icons.person, color: Colors.green),
-                SizedBox(width: 10),
-                Text("Account", style: TextStyle(fontSize: 20)),
-              ],
+            const ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Icon(Icons.person, color: Colors.green),
+              title: Text("Account", style: TextStyle(fontSize: 20)),
             ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Change Password"),
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _showPasswordForm = !_showPasswordForm;
-                    });
-                  },
-                  icon: Icon(_showPasswordForm
-                      ? Icons.keyboard_arrow_up
-                      : Icons.chevron_right),
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: const Text("Change Password"),
+              trailing: IconButton(
+                icon: Icon(
+                  _showPasswordForm ? Icons.keyboard_arrow_up : Icons.chevron_right,
                 ),
-              ],
+                onPressed: () {
+                  setState(() {
+                    _showPasswordForm = !_showPasswordForm;
+                  });
+                },
+              ),
             ),
-
             if (_showPasswordForm)
               Column(
                 children: [
@@ -93,9 +92,9 @@ class _SettingsState extends State<Settings> {
                       labelText: "New Password",
                       border: const OutlineInputBorder(),
                       suffixIcon: IconButton(
-                        icon: Icon(_obscurePassword
-                            ? Icons.visibility
-                            : Icons.visibility_off),
+                        icon: Icon(
+                          _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                        ),
                         onPressed: () {
                           setState(() {
                             _obscurePassword = !_obscurePassword;
@@ -113,7 +112,6 @@ class _SettingsState extends State<Settings> {
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  const SizedBox(height: 20),
                   Row(
                     children: [
                       Checkbox(
@@ -136,19 +134,19 @@ class _SettingsState extends State<Settings> {
                         backgroundColor: Colors.green,
                         padding: const EdgeInsets.symmetric(vertical: 15),
                       ),
-                      child: const Text("Reset Password", style: TextStyle(color: Colors.white)),
+                      child: const Text(
+                        "Reset Password",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ],
               ),
-
             const SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text("Content Settings"),
-                Icon(Icons.chevron_right),
-              ],
+            const ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text("Content Settings"),
+              trailing: Icon(Icons.chevron_right),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -169,29 +167,24 @@ class _SettingsState extends State<Settings> {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text("Privacy and security"),
-                Icon(Icons.chevron_right),
-              ],
+            const ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text("Privacy and security"),
+              trailing: Icon(Icons.chevron_right),
             ),
-
             const SizedBox(height: 30),
-            Row(
-              children: const [
-                Icon(Icons.volume_up_sharp, color: Colors.green),
-                SizedBox(width: 10),
-                Text("Notifications", style: TextStyle(fontSize: 20)),
-              ],
+            const ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Icon(Icons.volume_up_sharp, color: Colors.green),
+              title: Text("Notifications", style: TextStyle(fontSize: 20)),
             ),
-            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text("New for you"),
                 Switch(
                   value: _notificationsEnabled,
+                  activeColor: Colors.green,
                   onChanged: (value) {
                     setState(() {
                       _notificationsEnabled = value;
@@ -200,9 +193,8 @@ class _SettingsState extends State<Settings> {
                 ),
               ],
             ),
-
             const SizedBox(height: 30),
-            const Text("App Theme", style: TextStyle(fontSize: 16)),
+            const Text("App Theme", style: TextStyle(fontSize: 20)),
             Row(
               children: [
                 Radio<String>(
