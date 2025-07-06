@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tugas2/pages/tiketfix.dart';
 
 class tiketPesanan extends StatefulWidget {
   final String gambar;
@@ -32,14 +33,61 @@ class _tiketPesananState extends State<tiketPesanan> {
         children: [
           Column(
             children: [
-              Image.network(
-                widget.gambar
+              Stack(
+                children:[
+                  Center(
+                    child: Image.network(
+                      widget.gambar,
+                      fit: BoxFit.cover
+                    ),
+                  ),
+                  Positioned(
+                    top: 525,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      height: 240,
+                      padding: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(24), 
+                          topRight: Radius.circular(24)
+                        ),
+                        color: Colors.white
+                      ),
+                      child: Column(
+                        children: [
+                          Text(
+                            widget.judul,
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold 
+                            ),
+                          ),
+                          SizedBox(height: 8,),
+                          Text(
+                            widget.genre,
+                            style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                          ),
+                          SizedBox(height: 12,),
+                          Text(
+                            widget.deskripsi,
+                          ),
+                          SizedBox(height: 16,),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context, MaterialPageRoute(builder: (context) =>TiketFix())
+                              );
+                            }, 
+                            child: Text("Pesan Tiket"),
+                          )
+                        ],
+                      )
+                    ),
+                  )
+                ] 
               ),
-              Text(widget.judul),
-              Text(widget.deskripsi),
-              TextButton(
-                onPressed: () {}, child: Text("Pesan Tiket")
-              )
             ],
           ),
         ]

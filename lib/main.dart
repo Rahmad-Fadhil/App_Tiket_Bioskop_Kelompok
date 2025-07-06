@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tugas2/Provider/provider.dart';
+import 'package:tugas2/pages/homeeeee.dart';
 import 'package:tugas2/pages/regist.dart';
 
 
