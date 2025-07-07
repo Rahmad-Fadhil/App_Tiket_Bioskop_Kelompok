@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:tugas2/pages/tiketPurchase.dart';
 
 class TiketFix extends StatefulWidget {
-  const TiketFix({super.key});
+  final String judul;
+  final String genre;
+
+  const TiketFix({
+    super.key,
+    required this.judul,
+    required this.genre,
+  });
 
   @override
   State<TiketFix> createState() => _TiketFixState();
@@ -14,9 +23,9 @@ class _TiketFixState extends State<TiketFix> {
 
   String _selectedLanguage = 'Cinema XXI - Centre Point Mall Medan';
 
-  String tanggalHariini(DateTime dt) {
-    String hari = DateFormat
-    return "${dt.day} ${bln[dt.month-1]} ${dt.year}";
+  String formatTanggal(DateTime dt) {
+    String hari = DateFormat('EEEE', 'id_ID').format(dt);
+    return "hari: $hari  tanggal: ${dt.day}";
   }
 
   _minggu1(BuildContext context)async{
@@ -24,7 +33,7 @@ class _TiketFixState extends State<TiketFix> {
       context: context, 
       initialDate: DateTime.now(),
       firstDate: DateTime.now(), 
-      lastDate: DateTime.now().add(Duration(days: 6))
+      lastDate: DateTime(DateTime.now().year, DateTime.now().month +1,0)
     );
     if (tmp!=null) {
       setState(() {
@@ -39,12 +48,22 @@ class _TiketFixState extends State<TiketFix> {
       initialTime: TimeOfDay(hour: 10, minute: 0)
     );
     if (wib!=null) {
-      if (wib.minute == 0 && (wib.hour - 10) % 3 == 0) {
+      if ((wib.minute == 30 || wib.minute == 0) && wib.hour < 22 ) {
         setState(() {
           waktuNow = wib;
         });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Tidak Bisa memilih waktu lewat dari jam 22.00")),
+        );
       }
     }
+  }
+
+  String formatWaktu(TimeOfDay tod) {
+    final jam = tod.hour.toString().padLeft(2, '0');
+    final menit = tod.minute.toString().padLeft(2, '0');
+    return "$jam:$menit";
   }
 
   @override
@@ -66,7 +85,9 @@ class _TiketFixState extends State<TiketFix> {
                 title: Text("Select Cinema"),
                 trailing: Text("Changes", style: TextStyle(color: Colors.red),),
               ),
+              SizedBox(height: 15,),
               DropdownButton<String>(
+                isExpanded: true,
                 value: _selectedLanguage,
                 items: const [
                   DropdownMenuItem(value: 'Cinema XXI - Centre Point Mall Medan', child: Text('Cinema XXI - Centre Point Mall Medan')),
@@ -84,28 +105,65 @@ class _TiketFixState extends State<TiketFix> {
                   });
                 },
               ),
+              SizedBox(height: 15,),
               ListTile(
                 title: Text("Select Date & Time"),
                 trailing: Icon(Icons.date_range)
               ),
 
+              SizedBox(height: 15,),
               // ini untuk pilih tanggal 
-              ListView.builder(
-                itemCount: tanggalNow,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return ChoiceChip(label: index, selected: index)
+              ElevatedButton(
+                onPressed: () {
+                  _minggu1(context);
                 },
+                child: Text("Pilih tanggal")
               ),
+              SizedBox(height: 15,),
+              if (tanggalNow != null)
+                Card(
+                  child: ListTile(
+                    leading: Icon(Icons.calendar_today),
+                    title: Text("Tanggal Nonton"),
+                    subtitle: Text(formatTanggal(tanggalNow!)),
+                  ),
+                ),
 
-              // ini untuk pilih waktu
-              ListView.builder(
-                itemCount: waktuNow,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return ChoiceChip(label: index, selected: index)
+              SizedBox(height: 15,),
+              ElevatedButton(
+                onPressed: () {
+                  _WaktuPerHari(context);
                 },
+                child: Text("Pilih Waktu")
               ),
+              SizedBox(height: 15,),
+              if (waktuNow != null)
+                Card(
+                  child: ListTile(
+                    leading: Icon(Icons.access_time),
+                    title: Text("Waktu Nonton"),
+                    subtitle: Text(formatWaktu(waktuNow!)),
+                  ),
+                ),
+
+
+              ElevatedButton(
+                onPressed: (tanggalNow != null && waktuNow != null) ? () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>Tiketpurchase(
+                        judul: widget.judul, 
+                        genre: widget.genre, 
+                        tempat: _selectedLanguage, 
+                        tanggal: formatTanggal(tanggalNow!), 
+                        waktu: formatWaktu(waktuNow!),
+                      ),
+                    ),
+                  );
+                }
+                : null,
+               child: Text("Beli Tiket"))
             ],
           ),
         ]),

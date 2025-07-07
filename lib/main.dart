@@ -3,9 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:tugas2/Provider/provider.dart';
 import 'package:tugas2/pages/homeeeee.dart';
 import 'package:tugas2/pages/regist.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('id_ID', null);
   runApp(
     ChangeNotifierProvider(
       create: (_) => UserProvider(),

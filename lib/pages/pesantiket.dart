@@ -77,7 +77,7 @@ class _tiketPesananState extends State<tiketPesanan> {
                           ElevatedButton(
                             onPressed: () {
                               Navigator.push(
-                                context, MaterialPageRoute(builder: (context) =>TiketFix())
+                                context, MaterialPageRoute(builder: (context) =>TiketFix(genre:widget.genre,judul:widget.judul,))
                               );
                             }, 
                             child: Text("Pesan Tiket"),
