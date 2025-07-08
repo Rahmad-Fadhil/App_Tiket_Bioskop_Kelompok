@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:tugas2/pages/tiketfix.dart';
 
 class tiketPesanan extends StatefulWidget {
@@ -6,6 +7,7 @@ class tiketPesanan extends StatefulWidget {
   final String judul;
   final String genre;
   final String deskripsi;
+  final double rating;
 
   const tiketPesanan({
     super.key,
@@ -13,6 +15,7 @@ class tiketPesanan extends StatefulWidget {
     required this.judul,
     required this.deskripsi,
     required this.genre,
+    required this.rating
   });
 
   @override
@@ -65,6 +68,13 @@ class _tiketPesananState extends State<tiketPesanan> {
                             ),
                           ),
                           SizedBox(height: 8,),
+                          RatingBarIndicator(
+                            rating: widget.rating ,
+                            itemBuilder: (context, _) => Icon(Icons.star, color: Colors.amber),
+                            itemCount: 5,
+                            itemSize: 20.0,
+                          ),
+                          SizedBox(height: 6,),
                           Text(
                             widget.genre,
                             style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic),

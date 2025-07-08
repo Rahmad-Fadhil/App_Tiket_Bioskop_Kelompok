@@ -54,7 +54,7 @@ class _TiketFixState extends State<TiketFix> {
         });
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Tidak Bisa memilih waktu lewat dari jam 22.00")),
+          SnackBar(content: Text("Tidak Bisa memilih waktu lewat dari jam 22.00 dan harus menit 30")),
         );
       }
     }
@@ -77,96 +77,105 @@ class _TiketFixState extends State<TiketFix> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: ListView(
-          children: [Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ListTile(
-                title: Text("Select Cinema"),
-                trailing: Text("Changes", style: TextStyle(color: Colors.red),),
-              ),
-              SizedBox(height: 15,),
-              DropdownButton<String>(
-                isExpanded: true,
-                value: _selectedLanguage,
-                items: const [
-                  DropdownMenuItem(value: 'Cinema XXI - Centre Point Mall Medan', child: Text('Cinema XXI - Centre Point Mall Medan')),
-                  DropdownMenuItem(value: 'Thamrin XXI', child: Text('Thamrin XXI')),
-                  DropdownMenuItem(value: 'Cinema XXI & IMAX Delipark Podomoro', child: Text('Cinema XXI & IMAX Delipark Podomoro')),
-                  DropdownMenuItem(value: 'Millennium XXI', child: Text('Millennium XXI')),
-                  DropdownMenuItem(value: 'XXI Manhattan Square', child: Text('XXI Manhattan Square')),
-                  DropdownMenuItem(value: 'Hermes XXI', child: Text('Hermes XXI')),
-                  DropdownMenuItem(value: 'Cinepolis cinema Sun Plaza', child: Text('Cinepolis cinema Sun Plaza')),
-                  DropdownMenuItem(value: 'Ringroad City Walks XXI', child: Text('Ringroad City Walks XXI')),
-                ],
-                onChanged: (value) {
-                  setState(() {
-                    _selectedLanguage = value!;
-                  });
-                },
-              ),
-              SizedBox(height: 15,),
-              ListTile(
-                title: Text("Select Date & Time"),
-                trailing: Icon(Icons.date_range)
-              ),
-
-              SizedBox(height: 15,),
-              // ini untuk pilih tanggal 
-              ElevatedButton(
-                onPressed: () {
-                  _minggu1(context);
-                },
-                child: Text("Pilih tanggal")
-              ),
-              SizedBox(height: 15,),
-              if (tanggalNow != null)
-                Card(
-                  child: ListTile(
-                    leading: Icon(Icons.calendar_today),
-                    title: Text("Tanggal Nonton"),
-                    subtitle: Text(formatTanggal(tanggalNow!)),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                children: [
+                  ListTile(
+                    title: Text("Select Cinema"),
+                    trailing: Text("Changes", style: TextStyle(color: Colors.red),),
                   ),
-                ),
-
-              SizedBox(height: 15,),
-              ElevatedButton(
-                onPressed: () {
-                  _WaktuPerHari(context);
-                },
-                child: Text("Pilih Waktu")
-              ),
-              SizedBox(height: 15,),
-              if (waktuNow != null)
-                Card(
-                  child: ListTile(
-                    leading: Icon(Icons.access_time),
-                    title: Text("Waktu Nonton"),
-                    subtitle: Text(formatWaktu(waktuNow!)),
+                  SizedBox(height: 15,),
+                  DropdownButton<String>(
+                    isExpanded: true,
+                    value: _selectedLanguage,
+                    items: const [
+                      DropdownMenuItem(value: 'Cinema XXI - Centre Point Mall Medan', child: Text('Cinema XXI - Centre Point Mall Medan')),
+                      DropdownMenuItem(value: 'Thamrin XXI', child: Text('Thamrin XXI')),
+                      DropdownMenuItem(value: 'Cinema XXI & IMAX Delipark Podomoro', child: Text('Cinema XXI & IMAX Delipark Podomoro')),
+                      DropdownMenuItem(value: 'Millennium XXI', child: Text('Millennium XXI')),
+                      DropdownMenuItem(value: 'XXI Manhattan Square', child: Text('XXI Manhattan Square')),
+                      DropdownMenuItem(value: 'Hermes XXI', child: Text('Hermes XXI')),
+                      DropdownMenuItem(value: 'Cinepolis cinema Sun Plaza', child: Text('Cinepolis cinema Sun Plaza')),
+                      DropdownMenuItem(value: 'Ringroad City Walks XXI', child: Text('Ringroad City Walks XXI')),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedLanguage = value!;
+                      });
+                    },
                   ),
-                ),
-
-
-              ElevatedButton(
-                onPressed: (tanggalNow != null && waktuNow != null) ? () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>Tiketpurchase(
-                        judul: widget.judul, 
-                        genre: widget.genre, 
-                        tempat: _selectedLanguage, 
-                        tanggal: formatTanggal(tanggalNow!), 
-                        waktu: formatWaktu(waktuNow!),
+                  SizedBox(height: 15,),
+                  ListTile(
+                    title: Text("Select Date & Time"),
+                    trailing: Icon(Icons.date_range)
+                  ),
+                                
+                  SizedBox(height: 15,),
+                  // ini untuk pilih tanggal 
+                  ElevatedButton(
+                    onPressed: () {
+                      _minggu1(context);
+                    },
+                    child: Text("Pilih tanggal")
+                  ),
+                  SizedBox(height: 15,),
+                  if (tanggalNow != null)
+                    Card(
+                      child: ListTile(
+                        leading: Icon(Icons.calendar_today),
+                        title: Text("Tanggal Nonton"),
+                        subtitle: Text(formatTanggal(tanggalNow!)),
                       ),
                     ),
-                  );
-                }
-                : null,
-               child: Text("Beli Tiket"))
-            ],
-          ),
-        ]),
+                                
+                  SizedBox(height: 15,),
+                  ElevatedButton(
+                    onPressed: () {
+                      _WaktuPerHari(context);
+                    },
+                    child: Text("Pilih Waktu")
+                  ),
+                  SizedBox(height: 15,),
+                  if (waktuNow != null)
+                    Card(
+                      child: ListTile(
+                        leading: Icon(Icons.access_time),
+                        title: Text("Waktu Nonton"),
+                        subtitle: Text(formatWaktu(waktuNow!)),
+                      ),
+                    ),
+                                
+                ]
+              ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed:() {
+                        
+                },
+                      // onPressed: (tanggalNow != null && waktuNow != null) ? () {
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) =>Tiketpurchase(
+                      //         judul: widget.judul, 
+                      //         genre: widget.genre, 
+                      //         tempat: _selectedLanguage, 
+                      //         tanggal: formatTanggal(tanggalNow!), 
+                      //         waktu: formatWaktu(waktuNow!),
+                      //       ),
+                      //     ),
+                      //   );
+                      // }
+                      // : null,
+                child: Text("Beli Tiket")),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:tugas2/Provider/provider.dart';
 import 'package:tugas2/pages/commingsoon.dart';
@@ -29,126 +30,144 @@ class _homeeeeeState extends State<homeeeee> {
       'judul': 'Spider-Man: No Way Home',
       'genre': 'Action',
       'deskripsi': 'Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero.',
-      'event': 'in theater'
+      'event': 'in theater',
+      'rating': 4.5
     },
     {
       'Gambar': "https://image.tmdb.org/t/p/w500/62HCnUTziyWcpDaBO2i1DX17ljH.jpg",
       'judul': 'Top Gun: Maverick',
       'genre': 'Action',
       'deskripsi': 'After more than thirty years of service as one of the Navy\'s top aviators, Pete Mitchell is where he belongs.',
-      'event': 'in theater'
+      'event': 'in theater',
+      'rating': 4.0
     },
     {
       'Gambar': "https://image.tmdb.org/t/p/w500/sv1xJUazXeYqALzczSZ3O6nkH75.jpg",
       'judul': 'Black Panther: Wakanda Forever',
       'genre': 'Action',
       'deskripsi': 'Queen Ramonda, Shuri, M\'Baku, Okoye and the Dora Milaje fight to protect their nation.',
-      'event': 'in theater'
+      'event': 'in theater',
+      'rating': 5.0
     },
     {
       'Gambar': "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",
       'judul': 'Avatar: The Way of Water',
       'genre': 'Action',
       'deskripsi': 'Set more than a decade after the events of the first film, learn the story of the Sully family.',
-      'event': 'in theater'
+      'event': 'in theater',
+      'rating': 4.5
     },
     {
       'Gambar': "https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg",
       'judul': 'Doctor Strange in the Multiverse of Madness',
       'genre': 'Action',
       'deskripsi': 'Dr. Stephen Strange casts a forbidden spell that opens the doorway to the multiverse.',
-      'event': 'Coming soon'
+      'event': 'Coming soon',
+      'rating': 4.0
     },
     {
       'Gambar': "https://image.tmdb.org/t/p/w500/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg",
       'judul': 'Minions: The Rise of Gru',
       'genre': 'Comedy',
       'deskripsi': 'A fanboy of a supervillain supergroup known as the Vicious 6, Gru hatches a plan to become evil.',
-      'event': 'in theater'
+      'event': 'in theater',
+      'rating': 4.0
     },
     {
-      'Gambar': "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/khohu1IKmgGNvETjEaxZaWBw4fr.jpg",
+      'Gambar': "https://image.tmdb.org/t/p/w500/khohu1IKmgGNvETjEaxZaWBw4fr.jpg",
       'judul': 'Jurassic World Rebirth',
       'genre': 'Action',
       'deskripsi': 'In his second year of fighting crime, Batman uncovers corruption in Gotham City.',
-      'event': 'in theater'
+      'event': 'in theater',
+      'rating': 4.5
     },
     {
       'Gambar': "https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",
       'judul': 'Jurassic World Dominion',
       'genre': 'Action',
       'deskripsi': 'Four years after Isla Nublar was destroyed, dinosaurs now live alongside humans.',
-      'event': 'Coming soon'
+      'event': 'Coming soon',
+      'rating': 5.0
     },
     {
       'Gambar': "https://image.tmdb.org/t/p/w500/wToO8opxkGwKgSfJ1JK8tGvkG6U.jpg",
       'judul': 'Lightyear',
       'genre': 'Comedy',
       'deskripsi': 'Legendary Space Ranger Buzz Lightyear embarks on an intergalactic adventure.',
-      'event': 'Coming soon'
+      'event': 'Coming soon',
+      'rating': 3.0
     },
     {
-      'Gambar': "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/tmPgxA3oEQgLYTnsM4viazdEv8l.jpg",
+      'Gambar': "https://media.themoviedb.org/t/p/w500/tmPgxA3oEQgLYTnsM4viazdEv8l.jpg",
       'judul': 'GJLS IBUKU IBU-IBU',
       'genre': 'Comedy',
       'deskripsi': 'Legendary Space Ranger Buzz Lightyear embarks on an intergalactic adventure.',
-      'event': 'Coming soon'
+      'event': 'Coming soon',
+      'rating': 5.0
     },
     {
-      'Gambar': "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/d8iIVE9KmkSITslMYD6WvHvbRFk.jpg",
+      'Gambar': "https://image.tmdb.org/t/p/w500/d8iIVE9KmkSITslMYD6WvHvbRFk.jpg",
       'judul': '1 KAKAK 7 PONAKAN',
       'genre': 'Drama',
       'deskripsi': 'Legendary Space Ranger Buzz Lightyear embarks on an intergalactic adventure.',
-      'event': 'Coming soon'
+      'event': 'Coming soon',
+      'rating': 5.0
     },
     {
-      'Gambar': "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/orf0k9sdNhXX8LdUnzPWu3COq2S.jpg",
+      'Gambar': "https://image.tmdb.org/t/p/w500/orf0k9sdNhXX8LdUnzPWu3COq2S.jpg",
       'judul': 'HOME SWEET LOAN',
       'genre': 'Drama',
       'deskripsi': 'Legendary Space Ranger Buzz Lightyear embarks on an intergalactic adventure.',
-      'event': 'Coming soon'
+      'event': 'Coming soon',
+      'rating': 5.0
     },
     {
-      'Gambar': "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/d9JVFB2xEBI8Y68hFx0n2pYEfsY.jpg",
+      'Gambar': "https://image.tmdb.org/t/p/w500/d9JVFB2xEBI8Y68hFx0n2pYEfsY.jpg",
       'judul': 'WARKOP DKI REBORN',
       'genre': 'Comedy',
       'deskripsi': 'Legendary Space Ranger Buzz Lightyear embarks on an intergalactic adventure.',
-      'event': 'Coming soon'
+      'event': 'Coming soon',
+      'rating': 5.0
     },
     {
-      'Gambar': "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/lUOwyPbDD9Agl3pHQVHGbZE0TvI.jpg",
+      'Gambar': "https://image.tmdb.org/t/p/w500/lUOwyPbDD9Agl3pHQVHGbZE0TvI.jpg",
       'judul': 'AGAK LAEN',
       'genre': 'Comedy',
       'deskripsi': 'Legendary Space Ranger Buzz Lightyear embarks on an intergalactic adventure.',
-      'event': 'in theater'
+      'event': 'in theater',
+      'rating': 5.0
     },
     {
-      'Gambar': "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/hqcexYHbiTBfDIdDWxrxPtVndBX.jpg",
+      'Gambar': "https://image.tmdb.org/t/p/w500/hqcexYHbiTBfDIdDWxrxPtVndBX.jpg",
       'judul': 'THUNDERBOLTS',
       'genre': 'Action',
       'deskripsi': 'Legendary Space Ranger Buzz Lightyear embarks on an intergalactic adventure.',
-      'event': 'in theater'
+      'event': 'in theater',
+      'rating': 4.5
     },
     {
-      'Gambar': "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg",
+      'Gambar': "https://image.tmdb.org/t/p/w500/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg",
       'judul': 'AVENGERS ENDGAME',
       'genre': 'Action',
       'deskripsi': 'Legendary Space Ranger Buzz Lightyear embarks on an intergalactic adventure.',
-      'event': 'in theater'
+      'event': 'in theater',
+      'rating': 4.5
     },
     {
-      'Gambar': "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/8Wzkp1jHJda9M8q96tAfFIbQLvB.jpg",
+      'Gambar': "https://image.tmdb.org/t/p/w500/8Wzkp1jHJda9M8q96tAfFIbQLvB.jpg",
       'judul': 'JUMBO',
       'genre': 'Comedy',
-      'deskripsi': 'Jumbo adalah film animasi dengan genre fantasi petualangan Indonesia tahun 2025 yang disutradarai oleh Ryan Adriandhy dalam debut penyutradaraannya, berdasarkan naskah yang ditulisnya bersama dengan Widya Arifianti.',
-      'event': 'in theater'
+      'deskripsi': 'Jumbo adalah film animasi dengan genre fantasi petualangan Indonesia tahun 2025 yang disutradarai oleh Ryan Adriandhy',
+      'event': 'in theater',
+      'rating': 4.5
     },
     {
-      'Gambar': "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/vSNxAJTlD0r02V9sPYpOjqDZXUK.jpg",
+      'Gambar': "https://image.tmdb.org/t/p/w500/vSNxAJTlD0r02V9sPYpOjqDZXUK.jpg",
       'judul': 'CAPTAIN AMERICA',
       'genre': 'Action',
-      'deskripsi': 'Captain America: The First Avenger merupakan sebuah film pahlawan super Amerika Serikat yang dirilis pada tahun 2011. Ini adalah film kelima di Marvel Cinematic Universe.',
-      'event': 'in theater'
+      'deskripsi': 'Captain America: The First Avenger merupakan sebuah film pahlawan super Amerika Serikat yang dirilis pada tahun 2011.',
+      'event': 'in theater',
+      'rating': 4.0
     },
   ];
   @override
@@ -222,7 +241,7 @@ class _homeeeeeState extends State<homeeeee> {
                         ),
                         onPressed: () {
                           Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => tiketPesanan(gambar: movie['Gambar'], judul: movie['judul'], deskripsi: movie['deskripsi'], genre: movie['genre'],))
+                            context, MaterialPageRoute(builder: (context) => tiketPesanan(gambar: movie['Gambar'], judul: movie['judul'], deskripsi: movie['deskripsi'], genre: movie['genre'], rating: movie['rating'],))
                           );
                         },
                         child: ClipRRect(
