@@ -10,12 +10,48 @@ class Profil extends StatefulWidget {
 }
 
 class _ProfilState extends State<Profil> {
+  bool _isChanged = false;
   bool OnNotification = false;
   bool OnRecomendations = false;
+  final _nameController = TextEditingController();
+  final _bioController = TextEditingController();
+  final _descController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    final user = Provider.of<UserProvider>(context, listen: false);
+    _nameController.text = user.username;
+    _bioController.text = user.bio;
+    _descController.text = user.description;
+
+
+    _nameController.addListener(() => _checkForChanges(user));
+    _bioController.addListener(() => _checkForChanges(user));
+    _descController.addListener(() => _checkForChanges(user));
+  }
+
+  void _checkForChanges(UserProvider user) {
+    setState(() {
+      _isChanged =
+          _nameController.text != user.username ||
+          _bioController.text != user.bio ||
+          _descController.text != user.description;
+    });
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _bioController.dispose();
+    _descController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final username = Provider.of<UserProvider>(context).username;
+    final userProvider = Provider.of<UserProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -60,6 +96,7 @@ class _ProfilState extends State<Profil> {
                   ),
                   SizedBox(height: 12,),
                   TextField(
+                    controller: _nameController,
                     style: TextStyle(fontSize: 16),
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
@@ -77,7 +114,6 @@ class _ProfilState extends State<Profil> {
                         borderSide: BorderSide(color: Colors.grey),
                       ),
                       contentPadding: EdgeInsets.all(14),
-                      hintText: username
                     ),
                     onChanged: (value) {
                       Provider.of<UserProvider>(context, listen: false).setUsername(value);
@@ -97,6 +133,7 @@ class _ProfilState extends State<Profil> {
                   ),
                   SizedBox(height: 12,),
                   TextField(
+                    controller: _bioController,
                     style: TextStyle(fontSize: 16),
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
@@ -131,6 +168,7 @@ class _ProfilState extends State<Profil> {
                   ),
                   SizedBox(height: 12,),
                   TextField(
+                    controller: _descController,
                     style: TextStyle(fontSize: 16),
                     textAlignVertical: TextAlignVertical.top,
                     maxLines: null,
@@ -152,40 +190,7 @@ class _ProfilState extends State<Profil> {
                       hintText: 'Tulis sesuatu tentang diri Anda...'
                     ),
                   ),
-                  SizedBox(height: 20,),
-                  Row(
-                    children: [
-                      Text(
-                        "Birthday",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 12,),
-                  TextField(
-                    style: TextStyle(fontSize: 16),
-                    textAlignVertical: TextAlignVertical.center,
-                    decoration: InputDecoration(
-                      suffixIcon: Icon(Icons.edit),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey), // Warna border abu-abu saat fokus
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey),
-                      ),
-                      contentPadding: EdgeInsets.all(14),
-                      hintText: '11/05/2005'
-                    ),
-                  ),
+                  
                   SizedBox(height: 40,),
                   Row(
                     children: [
@@ -228,12 +233,52 @@ class _ProfilState extends State<Profil> {
                       });
                     })
                   ),
+
+                  SizedBox(height: 30),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: _isChanged ? () {
+                        
+                        userProvider.setUsername(_nameController.text);
+                        userProvider.setbio(_bioController.text);
+                        userProvider.setdescription(_descController.text);
+
+                        setState(() => _isChanged = false);
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Perubahan berhasil disimpan"),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      }
+                      : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: _isChanged ? Colors.blue : Colors.grey,
+                        padding: EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      ),
+                      child: Text(
+                        "Simpan Perubahan",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
         ]
       ),
+    );
+  }
+  InputDecoration _inputDecoration(String hint) {
+    return InputDecoration(
+      suffixIcon: const Icon(Icons.edit),
+      hintText: hint,
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+      contentPadding: const EdgeInsets.all(14),
     );
   }
 }
