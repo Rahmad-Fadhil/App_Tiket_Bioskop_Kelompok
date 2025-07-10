@@ -4,8 +4,11 @@ import 'package:tugas2/Provider/provider.dart';
 import 'package:tugas2/pages/historytiketpembelian.dart';
 import 'package:tugas2/pages/homeeeee.dart';
 import 'package:tugas2/pages/login.dart';
+import 'package:tugas2/pages/profil.dart';
 import 'package:tugas2/pages/settings.dart';
 import 'package:tugas2/pages/tentang.dart';
+import 'package:tugas2/pages/tiketPurchase.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,11 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
     else if (halaman == 1) {
       return TiketHistory();
     }
-    else if (halaman == 2) {
-      return Settings();
-    }
-    else {
-      return About();
+    else if (halaman ==2 ) {
+      return PurchaseHistoryPage();
+    } else {
+      return Profil();
     }
   }
 
@@ -47,6 +49,99 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text("NMFC", style: const TextStyle(color: Colors.white)),
         centerTitle: true,
         elevation: 0,
+        actions: [
+          Theme(
+            data: Theme.of(context).copyWith(
+              popupMenuTheme: PopupMenuThemeData(
+                color: Colors.white, 
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+            child: PopupMenuButton<String>(
+              icon: const Icon(Icons.more_vert, color: Colors.white), // ini warna nya nnati sesuain ya sama app bar kita
+              onSelected: (value) {
+                if (value == 'about') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const About()),
+                  );
+                } else if (value == 'settings') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Settings()),
+                  );
+                } else if (value == 'logout') {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("Logout Confirmation"),
+                        content: Text("Are you sure you want to logout?"),
+                        actions: [
+                          TextButton(
+                            child: Text("Cancel"),
+                            onPressed: () => Navigator.of(context).pop(),
+                          ),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              foregroundColor: Colors.red,
+                            ),
+                            child: Text("Logout"),
+                            onPressed: () {
+                              Provider.of<UserProvider>(context, listen: false).logout();
+                              Navigator.of(context).pop();
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => const Login()),
+                              );
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              },
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  value: 'about',
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.info, color: Colors.grey[600]),
+                      const SizedBox(height: 4),
+                      Text('About', style: GoogleFonts.poppins()),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'settings',
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.settings, color: Colors.grey[600]),
+                      const SizedBox(height: 4),
+                      Text('Settings', style: GoogleFonts.poppins()),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'logout',
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.logout, color:Colors.grey[600]),
+                      const SizedBox(height: 4),
+                      Text('Log Out', style: GoogleFonts.poppins()),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
       
       drawer: Drawer(
@@ -96,6 +191,9 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text('Profile', style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
+                setState(() {
+                  halaman = 3;
+                });
               },
             ),
 
@@ -107,6 +205,9 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text('Ticket Purchase', style: TextStyle(color: Colors.white)),
               onTap: () {
                 Navigator.pop(context);
+                setState(() {
+                  halaman = 2;
+                });
               },
             ),
 
@@ -123,81 +224,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             Divider(color: Colors.white30),
-
-            // SETTINGS
-            ListTile(
-              leading: Icon(Icons.settings, color: Colors.white),
-              title: Text('Settings', style: TextStyle(color: Colors.white)),
-              onTap: () {
-                Navigator.pop(context);
-                setState(() {
-                  halaman = 2;
-                });
-              },
-            ),
-
-            // ABOUT
-            ListTile(
-              leading: Icon(Icons.info, color: Colors.white),
-              title: Text('About', style: TextStyle(color: Colors.white)),
-              onTap: () {
-                Navigator.pop(context);
-                setState(() {
-                  halaman = 3;
-                });
-              },
-            ),
-
-            SizedBox(height: 20),
-
-            // LOGOUT BUTTON
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 12),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text("Logout Confirmation"),
-                        content: Text("Are you sure you want to logout?"),
-                        actions: [
-                          TextButton(
-                            child: Text("Cancel"),
-                            onPressed: () => Navigator.of(context).pop(),
-                          ),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.red,
-                            ),
-                            child: Text("Logout"),
-                            onPressed: () {
-                              Provider.of<UserProvider>(context, listen: false).logout();
-                              Navigator.of(context).pop();
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => const Login()),
-                              );
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-                icon: Icon(Icons.logout),
-                label: Text("Logout"),
-              ),
-            ),
 
             SizedBox(height: 20),
           ],

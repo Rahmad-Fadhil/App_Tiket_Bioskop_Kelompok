@@ -10,7 +10,7 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   bool _showPasswordForm = false;
   bool _obscurePassword = true;
-  bool _notificationsEnabled = false;
+  bool _notificationsEnabled = true;
   String _selectedTheme = 'Light';
   String _selectedLanguage = 'English';
   bool isAgreed = false;
@@ -30,10 +30,6 @@ class _SettingsState extends State<Settings> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Passwords do not match")),
       );
-    } else if (!isAgreed) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("You must agree to save password")),
-      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Password successfully changed")),
@@ -42,59 +38,76 @@ class _SettingsState extends State<Settings> {
         _showPasswordForm = false;
         _newPasswordController.clear();
         _confirmPasswordController.clear();
-        isAgreed = false;
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    const labelStyle = TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        elevation: 0,
+        elevation: 1,
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: Icon(Icons.person, color: Colors.green),
-              title: Text("Account", style: TextStyle(fontSize: 20)),
+         
+            Row(
+              children: const [
+                Icon(Icons.person, color: Colors.green),
+                SizedBox(width: 10),
+                Text("Account", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              ],
             ),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: const Text("Change Password"),
-              trailing: IconButton(
-                icon: Icon(
-                  _showPasswordForm ? Icons.keyboard_arrow_up : Icons.chevron_right,
-                ),
-                onPressed: () {
-                  setState(() {
-                    _showPasswordForm = !_showPasswordForm;
-                  });
-                },
+            const SizedBox(height: 20),
+
+           
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("Change Password", style: labelStyle),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _showPasswordForm = !_showPasswordForm;
+                      });
+                    },
+                    icon: Icon(_showPasswordForm
+                        ? Icons.keyboard_arrow_up
+                        : Icons.chevron_right),
+                  ),
+                ],
               ),
             ),
+
             if (_showPasswordForm)
               Column(
                 children: [
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 15),
                   TextField(
                     controller: _newPasswordController,
                     obscureText: _obscurePassword,
                     decoration: InputDecoration(
                       labelText: "New Password",
-                      border: const OutlineInputBorder(),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword ? Icons.visibility : Icons.visibility_off,
-                        ),
+                        icon: Icon(_obscurePassword
+                            ? Icons.visibility
+                            : Icons.visibility_off),
                         onPressed: () {
                           setState(() {
                             _obscurePassword = !_obscurePassword;
@@ -107,11 +120,12 @@ class _SettingsState extends State<Settings> {
                   TextField(
                     controller: _confirmPasswordController,
                     obscureText: _obscurePassword,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: "Confirm Password",
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                     ),
                   ),
+                  const SizedBox(height: 15),
                   Row(
                     children: [
                       Checkbox(
@@ -133,68 +147,79 @@ class _SettingsState extends State<Settings> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
                         padding: const EdgeInsets.symmetric(vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                      child: const Text(
-                        "Reset Password",
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      child: const Text("Reset Password", style: TextStyle(color: Colors.white)),
                     ),
                   ),
                 ],
               ),
+
             const SizedBox(height: 30),
-            const ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Text("Content Settings"),
-              trailing: Icon(Icons.chevron_right),
-            ),
+
+           
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Language"),
-                DropdownButton<String>(
-                  value: _selectedLanguage,
-                  items: const [
-                    DropdownMenuItem(value: 'English', child: Text('English')),
-                    DropdownMenuItem(value: 'Bahasa Indonesia', child: Text('Bahasa Indonesia')),
-                    DropdownMenuItem(value: 'Spanish', child: Text('Spanish')),
-                  ],
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedLanguage = value!;
-                    });
-                  },
-                ),
+              children: const [
+                Icon(Icons.settings, color: Colors.green),
+                SizedBox(width: 10),
+                Text("Content Settings", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               ],
             ),
+            const SizedBox(height: 15),
+
+            ListTile(
+              title: const Text("Language"),
+              trailing: DropdownButton<String>(
+                value: _selectedLanguage,
+                items: const [
+                  DropdownMenuItem(value: 'English', child: Text('English')),
+                  DropdownMenuItem(value: 'Bahasa Indonesia', child: Text('Bahasa Indonesia')),
+                  DropdownMenuItem(value: 'Spanish', child: Text('Spanish')),
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    _selectedLanguage = value!;
+                  });
+                },
+              ),
+            ),
+
+            const Divider(height: 30, thickness: 1),
+
             const ListTile(
-              contentPadding: EdgeInsets.zero,
               title: Text("Privacy and security"),
               trailing: Icon(Icons.chevron_right),
             ),
+
             const SizedBox(height: 30),
-            const ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: Icon(Icons.volume_up_sharp, color: Colors.green),
-              title: Text("Notifications", style: TextStyle(fontSize: 20)),
-            ),
+
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("New for you"),
-                Switch(
-                  value: _notificationsEnabled,
-                  activeColor: Colors.green,
-                  onChanged: (value) {
-                    setState(() {
-                      _notificationsEnabled = value;
-                    });
-                  },
-                ),
+              children: const [
+                Icon(Icons.volume_up_sharp, color: Colors.green),
+                SizedBox(width: 10),
+                Text("Notifications", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               ],
             ),
+            const SizedBox(height: 10),
+
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: const Text("New for you"),
+              value: _notificationsEnabled,
+              activeColor: Colors.green,
+              onChanged: (value) {
+                setState(() {
+                  _notificationsEnabled = value;
+                });
+              },
+            ),
+
             const SizedBox(height: 30),
-            const Text("App Theme", style: TextStyle(fontSize: 20)),
+
+         
+            const Text("App Theme", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
             Row(
               children: [
                 Radio<String>(

@@ -18,8 +18,7 @@ class _ProfilState extends State<Profil> {
     final username = Provider.of<UserProvider>(context).username;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black87,
-        foregroundColor: Colors.white,
+        backgroundColor: Colors.white,
         title: Text(
           "Edit Profile",
           style: TextStyle(
@@ -27,7 +26,6 @@ class _ProfilState extends State<Profil> {
             fontSize: 22,
           ),
         ),
-        centerTitle: true,
       ),
       body: ListView(
         children: [
